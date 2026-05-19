@@ -5,7 +5,7 @@ import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Location } from '@/types';
-import { locations, MAP_CENTER, MAP_ZOOM } from '@/data/locations';
+import { MAP_CENTER, MAP_ZOOM } from '@/data/locations';
 
 // Fix Leaflet default icon paths broken by webpack
 delete (L.Icon.Default.prototype as { _getIconUrl?: unknown })._getIconUrl;
@@ -16,26 +16,14 @@ L.Icon.Default.mergeOptions({
 });
 
 interface MapViewProps {
+  /** Filtered subset of locations to render as markers */
+  locations: Location[];
   selectedLocation: Location | null;
   onMarkerClick: (location: Location) => void;
 }
 
 /** Creates a custom HTML div icon for a location marker */
 function createMarkerIcon(location: Location, isSelected: boolean) {
-  const baseClasses = `
-    flex items-center justify-center
-    text-base font-bold
-    rounded-2xl border-2
-    shadow-lg
-    transition-all duration-200
-    select-none
-    cursor-pointer
-  `;
-
-  const selectedClasses = isSelected
-    ? 'border-indigo-600 bg-indigo-500 text-white scale-125 shadow-indigo-400/50 shadow-xl'
-    : 'border-white bg-white text-slate-800 hover:scale-110 hover:border-indigo-300';
-
   const html = `
     <div class="marker-wrapper ${isSelected ? 'marker-selected' : ''}">
       <div class="marker-bubble ${isSelected ? 'selected' : ''}">
@@ -44,7 +32,6 @@ function createMarkerIcon(location: Location, isSelected: boolean) {
       ${isSelected ? '<div class="marker-pulse"></div>' : ''}
     </div>
   `;
-
   return L.divIcon({
     html,
     className: '',
@@ -56,9 +43,11 @@ function createMarkerIcon(location: Location, isSelected: boolean) {
 
 /** Inner component: renders markers imperatively using Leaflet's JS API */
 function MarkersLayer({
+  locations,
   selectedLocation,
   onMarkerClick,
 }: {
+  locations: Location[];
   selectedLocation: Location | null;
   onMarkerClick: (location: Location) => void;
 }) {
@@ -66,11 +55,9 @@ function MarkersLayer({
   const markersRef = useRef<Record<string, L.Marker>>({});
 
   useEffect(() => {
-    // Clear existing markers
     Object.values(markersRef.current).forEach((m) => m.remove());
     markersRef.current = {};
 
-    // Add fresh markers
     locations.forEach((loc) => {
       const isSelected = selectedLocation?.id === loc.id;
       const icon = createMarkerIcon(loc, isSelected);
@@ -84,7 +71,7 @@ function MarkersLayer({
       Object.values(markersRef.current).forEach((m) => m.remove());
       markersRef.current = {};
     };
-  }, [map, selectedLocation, onMarkerClick]);
+  }, [map, locations, selectedLocation, onMarkerClick]);
 
   return null;
 }
@@ -103,7 +90,7 @@ function MapFlyTo({ location }: { location: Location | null }) {
   return null;
 }
 
-export function MapView({ selectedLocation, onMarkerClick }: MapViewProps) {
+export function MapView({ locations, selectedLocation, onMarkerClick }: MapViewProps) {
   return (
     <MapContainer
       center={MAP_CENTER}
@@ -118,6 +105,7 @@ export function MapView({ selectedLocation, onMarkerClick }: MapViewProps) {
         maxZoom={19}
       />
       <MarkersLayer
+        locations={locations}
         selectedLocation={selectedLocation}
         onMarkerClick={onMarkerClick}
       />

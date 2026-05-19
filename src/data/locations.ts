@@ -10,7 +10,10 @@ export const locations: Location[] = [
     name: 'Tucano Coffee Piata Romana',
     coordinates: [44.44795, 26.09973],
     category: 'cafe',
+    source: 'official',
     iconEmoji: '☕',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/640px-A_small_cup_of_coffee.JPG',
     current:
       'Un café modern, frecventat de studenții ASE și de remote workers. Spațiul vibrează cu energie creativă, laptopuri deschise și arome de specialty coffee.',
     historical:
@@ -24,7 +27,10 @@ export const locations: Location[] = [
     name: 'Pizza Hut Piata Romana',
     coordinates: [44.44681, 26.09865],
     category: 'restaurant',
+    source: 'official',
     iconEmoji: '🍕',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/640px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
     current:
       'Restaurant fast-food și un punct de întâlnire popular pentru studenți, turiști și localnici. Un reper vizual inconfundabil al pieței.',
     historical:
@@ -38,7 +44,10 @@ export const locations: Location[] = [
     name: 'ASE — Clădirea Virgil Madgearu',
     coordinates: [44.44782, 26.09880],
     category: 'university',
+    source: 'official',
     iconEmoji: '🎓',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/ASE_Bucuresti.jpg/640px-ASE_Bucuresti.jpg',
     current:
       'Clădire importantă a ASE București, utilizată în principal de Facultatea de Cibernetică, Statistică și Informatică Economică. Dotată cu laboratoare IT de înaltă tehnologie.',
     historical:
@@ -52,7 +61,10 @@ export const locations: Location[] = [
     name: 'ASE — Clădirea Ion N. Angelescu',
     coordinates: [44.44769, 26.09692],
     category: 'university',
+    source: 'official',
     iconEmoji: '🏛️',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/ASE_Bucuresti.jpg/640px-ASE_Bucuresti.jpg',
     current:
       'Clădirea principală a ASE București și un simbol iconic al universității. Sediul rectoratului și al principalelor amfiteatre.',
     historical:
@@ -66,7 +78,10 @@ export const locations: Location[] = [
     name: 'Piața Romană — Hub Istoric',
     coordinates: [44.44583, 26.09731],
     category: 'landmark',
+    source: 'official',
     iconEmoji: '📍',
+    imageUrl:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Piata_Romana_Bucuresti.jpg/640px-Piata_Romana_Bucuresti.jpg',
     current:
       'Una dintre cele mai aglomerate intersecții din București, un nod central al transportului public și un punct de referință urban esențial.',
     historical:
@@ -80,6 +95,7 @@ export const locations: Location[] = [
     name: 'Silence Pub Piața Romană',
     coordinates: [44.44965, 26.09646],
     category: 'pub',
+    source: 'official',
     iconEmoji: '🍺',
     current:
       'Classic underground pub frecventat cu precădere de studenții ASE. O atmosferă caldă, muzică bună și prețuri accesibile.',
@@ -92,9 +108,9 @@ export const locations: Location[] = [
 ];
 
 /**
- * Mock community posts seeded for a non-empty feed on first load.
+ * Seed community posts — used as the initial localStorage value on first visit.
  */
-export const communityPosts: CommunityPost[] = [
+export const seedCommunityPosts: CommunityPost[] = [
   {
     id: 'post-andrei',
     name: 'Andrei',
@@ -102,6 +118,7 @@ export const communityPosts: CommunityPost[] = [
       'Țin minte când ne strângeam toți la gura de metrou de la Romană înainte de examene. Locul ăsta are o energie aparte dimineața.',
     tag: 'Metrou Piața Romană',
     createdAt: '2026-05-18T08:30:00Z',
+    source: 'community',
   },
   {
     id: 'post-maria',
@@ -110,6 +127,7 @@ export const communityPosts: CommunityPost[] = [
       'Bunicul meu îmi povestea că pe bulevardul Magheru erau cele mai elegante cinematografe. Acum e doar trafic, dar când te uiți la clădirile de sus, încă se vede arhitectura interbelică.',
     tag: 'Bulevardul Magheru',
     createdAt: '2026-05-17T14:15:00Z',
+    source: 'community',
   },
 ];
 

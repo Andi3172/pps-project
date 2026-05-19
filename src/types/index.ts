@@ -5,12 +5,18 @@ export type LocationCategory =
   | 'landmark'
   | 'pub';
 
+/** Discriminator: whether the item originates from official curation or the community */
+export type ItemSource = 'official' | 'community';
+
 export interface Location {
   id: string;
   name: string;
   /** [latitude, longitude] */
   coordinates: [number, number];
+  /** Place type — drives marker/card color and label */
   category: LocationCategory;
+  /** Discriminator for the toggle filter */
+  source: ItemSource;
   /** Short description of the current state of the place */
   current: string;
   /** Historical background / past context */
@@ -21,6 +27,8 @@ export interface Location {
   sourceUrl?: string;
   /** Emoji icon rendered on the map marker */
   iconEmoji: string;
+  /** Optional image URL displayed at top of story card */
+  imageUrl?: string;
 }
 
 export interface CommunityPost {
@@ -35,6 +43,8 @@ export interface CommunityPost {
   createdAt: string;
   /** Optional image URL provided by contributor */
   imageUrl?: string;
+  /** Always 'community' — used for filtering */
+  source: 'community';
 }
 
 export interface ContributeFormData {

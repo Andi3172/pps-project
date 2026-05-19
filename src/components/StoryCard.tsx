@@ -1,7 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import { Location } from '@/types';
-import { ExternalLink, Lightbulb, History, MapPin } from 'lucide-react';
+import { ExternalLink, Lightbulb, History, MapPin, ImageOff } from 'lucide-react';
 
 interface StoryCardProps {
   location: Location;
@@ -23,18 +24,46 @@ const categoryLabels: Record<string, string> = {
   pub: 'Pub',
 };
 
+function ImageBlock({ imageUrl }: { imageUrl?: string }) {
+  const [errored, setErrored] = useState(false);
+
+  if (!imageUrl || errored) {
+    return (
+      <div className="w-full h-36 rounded-xl bg-gray-100 flex flex-col items-center justify-center gap-2 text-gray-400 select-none">
+        <ImageOff size={24} strokeWidth={1.5} />
+        <span className="text-xs font-medium">Fără imagine disponibilă</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full h-36 rounded-xl overflow-hidden bg-gray-100">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={imageUrl}
+        alt=""
+        className="w-full h-full object-cover"
+        onError={() => setErrored(true)}
+      />
+    </div>
+  );
+}
+
 export function StoryCard({ location }: StoryCardProps) {
   return (
-    <div className="flex flex-col gap-5 px-1">
+    <div className="flex flex-col gap-4 px-1">
+      {/* Image */}
+      <ImageBlock imageUrl={location.imageUrl} />
+
       {/* Header */}
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <span
             className={`text-xs font-semibold px-2.5 py-1 rounded-full tracking-wide uppercase ${
-              categoryColors[location.category]
+              categoryColors[location.category] ?? 'bg-gray-100 text-gray-600'
             }`}
           >
-            {categoryLabels[location.category]}
+            {categoryLabels[location.category] ?? location.category}
           </span>
         </div>
         <div className="flex items-start gap-3">
@@ -55,9 +84,7 @@ export function StoryCard({ location }: StoryCardProps) {
             Prezent
           </h3>
         </div>
-        <p className="text-sm text-slate-700 leading-relaxed">
-          {location.current}
-        </p>
+        <p className="text-sm text-slate-700 leading-relaxed">{location.current}</p>
       </section>
 
       {/* Historical */}
@@ -68,9 +95,7 @@ export function StoryCard({ location }: StoryCardProps) {
             Trecut
           </h3>
         </div>
-        <p className="text-sm text-slate-700 leading-relaxed">
-          {location.historical}
-        </p>
+        <p className="text-sm text-slate-700 leading-relaxed">{location.historical}</p>
       </section>
 
       {/* Fun Fact */}
