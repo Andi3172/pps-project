@@ -24,24 +24,27 @@ const categoryLabels: Record<string, string> = {
   pub: 'Pub',
 };
 
-function ImageBlock({ imageUrl }: { imageUrl?: string }) {
+/* ─── Single image tile with independent error state ────────── */
+function ImageTile({ src, index }: { src: string; index: number }) {
   const [errored, setErrored] = useState(false);
 
-  if (!imageUrl || errored) {
+  if (errored) {
     return (
-      <div className="w-full h-36 rounded-xl bg-gray-100 flex flex-col items-center justify-center gap-2 text-gray-400 select-none">
-        <ImageOff size={24} strokeWidth={1.5} />
-        <span className="text-xs font-medium">Fără imagine disponibilă</span>
+      <div className="flex-shrink-0 w-52 h-36 rounded-xl bg-gray-100 flex flex-col items-center justify-center gap-1.5 text-gray-400 snap-start">
+        <ImageOff size={20} strokeWidth={1.5} />
+        <span className="text-[10px] font-medium text-center px-2">
+          Fără imagine disponibilă
+        </span>
       </div>
     );
   }
 
   return (
-    <div className="w-full h-36 rounded-xl overflow-hidden bg-gray-100">
+    <div className="flex-shrink-0 w-52 h-36 rounded-xl overflow-hidden bg-gray-100 snap-start">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={imageUrl}
-        alt=""
+        src={src}
+        alt={`Imagine ${index + 1}`}
         className="w-full h-full object-cover"
         onError={() => setErrored(true)}
       />
@@ -49,23 +52,52 @@ function ImageBlock({ imageUrl }: { imageUrl?: string }) {
   );
 }
 
+/* ─── Image gallery strip ───────────────────────────────────── */
+function ImageGallery({ imageUrls }: { imageUrls?: string[] }) {
+  if (!imageUrls || imageUrls.length === 0) {
+    return (
+      <div className="w-full h-36 rounded-xl bg-gray-100 flex flex-col items-center justify-center gap-2 text-gray-400">
+        <ImageOff size={24} strokeWidth={1.5} />
+        <span className="text-xs font-medium">Fără imagine disponibilă</span>
+      </div>
+    );
+  }
+
+  // Single image — full width, no horizontal scroll
+  if (imageUrls.length === 1) {
+    return (
+      <div className="w-full h-36 rounded-xl overflow-hidden bg-gray-100">
+        <ImageTile src={imageUrls[0]} index={0} />
+      </div>
+    );
+  }
+
+  // Multiple images — horizontal scrollable gallery
+  return (
+    <div className="flex gap-2 overflow-x-auto snap-x snap-mandatory pb-1 -mx-1 px-1 scrollbar-hide">
+      {imageUrls.map((url, i) => (
+        <ImageTile key={url} src={url} index={i} />
+      ))}
+    </div>
+  );
+}
+
+/* ─── Story Card ────────────────────────────────────────────── */
 export function StoryCard({ location }: StoryCardProps) {
   return (
     <div className="flex flex-col gap-4 px-1">
-      {/* Image */}
-      <ImageBlock imageUrl={location.imageUrl} />
+      {/* Image gallery */}
+      <ImageGallery imageUrls={location.imageUrls} />
 
       {/* Header */}
       <div className="flex flex-col gap-2">
-        <div className="flex items-center gap-2">
-          <span
-            className={`text-xs font-semibold px-2.5 py-1 rounded-full tracking-wide uppercase ${
-              categoryColors[location.category] ?? 'bg-gray-100 text-gray-600'
-            }`}
-          >
-            {categoryLabels[location.category] ?? location.category}
-          </span>
-        </div>
+        <span
+          className={`self-start text-xs font-semibold px-2.5 py-1 rounded-full tracking-wide uppercase ${
+            categoryColors[location.category] ?? 'bg-gray-100 text-gray-600'
+          }`}
+        >
+          {categoryLabels[location.category] ?? location.category}
+        </span>
         <div className="flex items-start gap-3">
           <span className="text-3xl leading-none mt-0.5 select-none">
             {location.iconEmoji}

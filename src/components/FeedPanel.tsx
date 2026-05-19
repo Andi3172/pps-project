@@ -146,9 +146,9 @@ export function FeedPanel({
   onSelectOnMap,
 }: FeedPanelProps) {
   return (
-    <div className="flex flex-col h-full">
-      {/* Sticky top: app title + toggle */}
-      <div className="flex-shrink-0 bg-white/95 backdrop-blur-md border-b border-gray-100 px-4 pt-4 pb-3 flex flex-col gap-3">
+    <div className="h-full overflow-y-auto">
+      {/* ── Sticky header: title + toggle ── */}
+      <div className="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-gray-100 px-4 pt-4 pb-3 flex flex-col gap-3">
         <div className="flex items-center gap-2.5">
           <div className="w-7 h-7 bg-indigo-500 rounded-xl flex items-center justify-center flex-shrink-0">
             <span className="text-white text-xs">✦</span>
@@ -165,8 +165,8 @@ export function FeedPanel({
         <TabToggle active={activeTab} onChange={onTabChange} />
       </div>
 
-      {/* Scrollable feed body */}
-      <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4">
+      {/* ── Scrollable feed body ── */}
+      <div className="px-4 py-4 flex flex-col gap-4">
         {activeTab === 'community' && (
           <>
             <ComposeBox onSubmit={onNewPost} />
@@ -198,3 +198,4 @@ export function FeedPanel({
     </div>
   );
 }
+

@@ -27,8 +27,8 @@ export interface Location {
   sourceUrl?: string;
   /** Emoji icon rendered on the map marker */
   iconEmoji: string;
-  /** Optional image URL displayed at top of story card */
-  imageUrl?: string;
+  /** Array of image URLs displayed as a horizontal gallery in the story card */
+  imageUrls?: string[];
 }
 
 export interface CommunityPost {

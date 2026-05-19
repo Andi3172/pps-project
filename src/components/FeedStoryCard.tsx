@@ -83,17 +83,17 @@ export function CommunityPostCard({ post }: CommunityCardProps) {
       {/* Story text */}
       <p className="text-sm text-gray-700 leading-relaxed">{post.story}</p>
 
-      {/* Image link */}
+      {/* Inline image */}
       {post.imageUrl && (
-        <a
-          href={post.imageUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-xs text-indigo-500 hover:text-indigo-700 transition-colors"
-        >
-          <ExternalLink size={12} />
-          Vezi imaginea
-        </a>
+        <div className="w-full h-48 rounded-lg overflow-hidden bg-gray-100 mt-1">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={post.imageUrl}
+            alt="Community upload"
+            className="w-full h-48 object-cover rounded-lg"
+            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+          />
+        </div>
       )}
     </article>
   );
@@ -119,12 +119,12 @@ export function LocationStoryCard({ location, onSelectOnMap }: LocationCardProps
 
   return (
     <article className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden flex flex-col">
-      {/* Image */}
-      {location.imageUrl && !imgErrored ? (
+      {/* Image — first from gallery */}
+      {location.imageUrls && location.imageUrls.length > 0 && !imgErrored ? (
         <div className="h-36 w-full bg-gray-100 flex-shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={location.imageUrl}
+            src={location.imageUrls[0]}
             alt=""
             className="w-full h-full object-cover"
             onError={() => setImgErrored(true)}
@@ -136,6 +136,7 @@ export function LocationStoryCard({ location, onSelectOnMap }: LocationCardProps
           <span className="text-xs">Fără imagine disponibilă</span>
         </div>
       )}
+
 
       <div className="p-5 flex flex-col gap-4">
         {/* Header */}

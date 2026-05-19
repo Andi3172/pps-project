@@ -12,8 +12,12 @@ export const locations: Location[] = [
     category: 'cafe',
     source: 'official',
     iconEmoji: '☕',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/640px-A_small_cup_of_coffee.JPG',
+    imageUrls: [
+      'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/f7/9f/85/tucano-coffee.jpg?w=500&h=-1&s=1',
+      'https://d2fdt3nym3n14p.cloudfront.net/venue/802/gallery/2037/conversions/image1-big.jpg',
+      'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/53/d8/bf/caption.jpg?w=1100&h=1100&s=1',
+      'https://www.francize.ro/wp-content/uploads/2015/08/Cafenea-Tucano-Coffee-Piata-Romana-Bucuresti-3.jpg',
+    ],
     current:
       'Un café modern, frecventat de studenții ASE și de remote workers. Spațiul vibrează cu energie creativă, laptopuri deschise și arome de specialty coffee.',
     historical:
@@ -29,8 +33,11 @@ export const locations: Location[] = [
     category: 'restaurant',
     source: 'official',
     iconEmoji: '🍕',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/640px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+    imageUrls: [
+      'https://www.trendshrb.ro/wp-content/uploads/Pizza-Hut-Aniversare-25-de-ani.jpg',
+      'https://lh3.googleusercontent.com/gps-cs-s/APNQkAE3ERWHwolJl3ss9UBtG2UA2Mhlm1W33rJuc_nD6YN0PFEzBNYNf1eAlByLJnGyhQ2Eq4Ryiz1dicMekfucCgeIAG3JUt0o_zRzN85EgZDdNf9PyaizG8ndE_0zwvBZhz6yTPY4=s680-w680-h510',
+      'https://lh3.googleusercontent.com/gps-cs-s/APNQkAFUc5dUHXUk4A3QKsAakHjDPvis2F27fR2MVsiMQZoVISrpdwlPyNcJ7KcZTBY9vTgRhqa50qLpAqIONlGtcEvRorwKwu11OURMH4haSCjjhH3t_4roUQSa7E3Os0z5-YbXFignH2S2qV9t=s680-w680-h510',
+    ],
     current:
       'Restaurant fast-food și un punct de întâlnire popular pentru studenți, turiști și localnici. Un reper vizual inconfundabil al pieței.',
     historical:
@@ -46,8 +53,11 @@ export const locations: Location[] = [
     category: 'university',
     source: 'official',
     iconEmoji: '🎓',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/ASE_Bucuresti.jpg/640px-ASE_Bucuresti.jpg',
+    imageUrls: [
+      'https://admitere.ase.ro/images/ase/thumbs/Cladirea-Mihai-Eminescu-intrare.jpg',
+      'https://lh3.googleusercontent.com/gps-cs-s/APNQkAHMerI1ID2DVqKLCyJ3nrtpqe7A1lwa6-CTwccA4tMWqSBsFbKESxBgdulCyxKnY2J6cI6advsBhPamOke-hsxJUm5H42Uj8O7a6SMhqF1v6paHAIhEbXxKsyNjHsmM60sJt1EUCQ=s680-w680-h510',
+      'https://admitere.ase.ro/images/ase/thumbs/Cladirea-Virgil-Madgearu.jpg',
+    ],
     current:
       'Clădire importantă a ASE București, utilizată în principal de Facultatea de Cibernetică, Statistică și Informatică Economică. Dotată cu laboratoare IT de înaltă tehnologie.',
     historical:
@@ -63,8 +73,11 @@ export const locations: Location[] = [
     category: 'university',
     source: 'official',
     iconEmoji: '🏛️',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/ASE_Bucuresti.jpg/640px-ASE_Bucuresti.jpg',
+    imageUrls: [
+      'https://upload.wikimedia.org/wikipedia/commons/a/a3/Cladirea_ASE_Bucuresti.jpg',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbEX5Qa7ry1OX5T6ofibDurV9DnQyX_KrW2A&s',
+      'https://economedia.ro/wp-content/uploads/2024/09/ASE-Cladire-noua-Nanu-Muscel.jpg',
+    ],
     current:
       'Clădirea principală a ASE București și un simbol iconic al universității. Sediul rectoratului și al principalelor amfiteatre.',
     historical:
@@ -80,8 +93,11 @@ export const locations: Location[] = [
     category: 'landmark',
     source: 'official',
     iconEmoji: '📍',
-    imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Piata_Romana_Bucuresti.jpg/640px-Piata_Romana_Bucuresti.jpg',
+    imageUrls: [
+      'https://visitbucharest.today/wp-content/uploads/2025/08/Piata-Romana-Roman-Square-Bucharest.jpg',
+      'https://bucurestiulmeudrag.ro/img/photos/s1920/5800067d-76cc-4ea9-8122-d4fb592b13d5.jpg',
+      'https://www.imagist.ro/wp-content/uploads/2015/02/piata-romana-9.jpg',
+    ],
     current:
       'Una dintre cele mai aglomerate intersecții din București, un nod central al transportului public și un punct de referință urban esențial.',
     historical:
@@ -97,6 +113,11 @@ export const locations: Location[] = [
     category: 'pub',
     source: 'official',
     iconEmoji: '🍺',
+    imageUrls: [
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK2aYoZeRe24YfBgbwgnEIBwU4C8314mq1Zw&s',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIIDtSqCrpaF6NC_hkUCYhx1c9k5g-AjIMgA&s',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxFOpd_udohjxGtWunrEagULi7u_XoePbuJA&s',
+    ],
     current:
       'Classic underground pub frecventat cu precădere de studenții ASE. O atmosferă caldă, muzică bună și prețuri accesibile.',
     historical:
