@@ -1,26 +1,117 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ─── Global Reset ─────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
+/* ─── Custom Marker Styles ──────────────────────────────────────────── */
+.marker-wrapper {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marker-bubble {
+  position: relative;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: white;
+  border: 2.5px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18), 0 1px 3px rgba(0, 0, 0, 0.12);
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.marker-bubble:hover {
+  transform: scale(1.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+}
+
+.marker-bubble.selected {
+  background: #6366f1;
+  border-color: #4f46e5;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5), 0 2px 6px rgba(0, 0, 0, 0.15);
+  transform: scale(1.2);
+}
+
+/* Pulse ring for selected marker */
+.marker-pulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 18px;
+  border: 2px solid #6366f1;
+  animation: pulse-ring 1.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+  z-index: 1;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── Leaflet Overrides ─────────────────────────────────────────────── */
+/* Remove attribution box that conflicts with UI */
+.leaflet-control-attribution {
+  font-size: 9px;
+  opacity: 0.6;
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(4px);
+  border-radius: 6px 0 0 0;
+}
+
+/* Ensure tiles render below all UI overlays */
+.leaflet-tile-pane {
+  z-index: 1;
+}
+
+.leaflet-pane {
+  z-index: 2;
+}
+
+/* ─── Smooth Scrollbars ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
 }
